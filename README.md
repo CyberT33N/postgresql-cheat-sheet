@@ -33,3 +33,50 @@ sudo apt install pgadmin4-web
 # Configure the webserver, if you installed pgadmin4-web:
 sudo /usr/pgadmin4/bin/setup-web.sh
 ```
+
+
+
+
+
+
+
+
+
+
+<br><br>
+<br><br>
+___
+<br><br>
+<br><br>
+
+# Helm Chart
+
+## Minikube
+custom-values.yaml
+```
+auth:
+  enablePostgresUser: true
+  # Superuser password
+  postgresPassword: "test"
+  username: "test"
+  password: "test"
+  database: "test"
+
+primary:
+  service:
+    type: NodePort
+    nodePorts:
+      postgresql: 30543
+
+  persistence:
+    enabled: true
+    size: 8Gi
+
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+```

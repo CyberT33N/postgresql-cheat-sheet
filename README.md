@@ -6,6 +6,13 @@
 ## pgadmin
 - https://www.pgadmin.org/
 
+
+### Windows
+- https://www.pgadmin.org/download/pgadmin-4-windows/
+
+
+### Linux
+
 ```shell
 #
 # Setup the repository

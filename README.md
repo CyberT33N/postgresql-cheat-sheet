@@ -163,7 +163,18 @@ Das ist der direkteste Weg, um einen Überblick über die Struktur zu bekommen.
 Dieser Weg zeigt Ihnen die **Struktur** (also ob die Tabellen und Spalten da sind), aber noch nicht die **Daten** selbst.
 
 
+<br><br>
 
+
+#### Show values
+
+Nachdem Sie eine Tabelle im Objekt-Browser gefunden haben, ist das der einfachste Weg, um einen Blick auf die Daten zu werfen.
+
+1.  Machen Sie einen **Rechtsklick** auf den Namen der gewünschten Tabelle (z. B. `patient`).
+2.  Gehen Sie im Menü auf **"View/Edit Data"**.
+3.  Wählen Sie **"First 100 Rows"**.
+
+Es öffnet sich ein neuer Tab namens "Data Output" im Hauptfenster, der Ihnen die ersten 100 Zeilen der Tabelle in einer übersichtlichen Ansicht anzeigt. Das ist der beste Weg, um schnell zu prüfen, ob der Datenimport geklappt hat.
 
 
 

@@ -131,6 +131,9 @@ Wenn Sie diese Einstellungen verwenden, erhalten Sie eine Datei, die alles Notwe
 # Table
 
 ## Show all tables
+
+
+### Query
 PGadmin: Rechtsklick auf die DB → Query Tool →
 ```sql
 SELECT table_name
@@ -138,6 +141,33 @@ FROM information_schema.tables
 WHERE table_schema = 'public'
 ORDER BY table_name;
 ```
+
+
+<br><br>
+
+
+### PGadmin
+
+Prima, das ist ein wichtiger Schritt! Es gibt mehrere einfache Wege in pgAdmin, um zu überprüfen, ob die Tabellen und ihre Inhalte korrekt importiert wurden.
+
+#### Show Schema
+
+Das ist der direkteste Weg, um einen Überblick über die Struktur zu bekommen.
+
+1.  **Datenbank aufklappen:** Klicken Sie auf den kleinen Pfeil neben Ihrer importierten Datenbank (z. B. `Charly`).
+2.  **Schemas aufklappen:** Klappen Sie den Ordner `Schemas` auf.
+3.  **Public-Schema aufklappen:** Klappen Sie das Schema `public` auf (hier liegen meistens die Tabellen).
+4.  **Tabellen anzeigen:** Klicken Sie auf den Ordner `Tables`. Jetzt sehen Sie eine Liste aller importierten Tabellen.
+5.  **Spalten (Columns) ansehen:** Klicken Sie auf den Pfeil neben einer Tabelle, die Sie interessiert (z. B. `patient`). Darunter erscheint ein Ordner `Columns`. Wenn Sie diesen aufklappen, sehen Sie die Namen und Datentypen aller Spalten in dieser Tabelle.
+
+Dieser Weg zeigt Ihnen die **Struktur** (also ob die Tabellen und Spalten da sind), aber noch nicht die **Daten** selbst.
+
+
+
+
+
+
+
 
 
 

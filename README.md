@@ -1,6 +1,100 @@
 # postgresql-cheat-sheet
 
 
+
+# Dump
+
+
+## pgAdmin
+
+1. **pgAdmin starten** (meist `pgAdmin 4`).
+2. Links im Browser-Baum deine **Server-Verbindung** öffnen.
+
+   * Host: `localhost`
+   * Port: (bei Charly meist `5433` oder `5434`)
+   * User: `charly` oder `postgres`
+   * PW: siehe Installation / `pg_hba.conf`.
+3. Rechtsklick auf die **Datenbank z.b. `charly`** → **Backup…**
+
+---
+
+### 🔹 Backup-Dialog einstellen
+
+* **Format**:
+
+  * `Custom` (empfohlen, flexibler für Restore mit `pg_restore`)
+  * oder `Plain` (SQL-Datei, kann man direkt durchlaufen lassen).
+* **Filename**:
+
+  * z. B. `C:\Backup\charly.backup`
+* **Dump Options #1**:
+
+  * `Include CREATE DATABASE` aktivieren, wenn du eine 1:1-Kopie willst.
+* **Dump Options #2**:
+
+  * Standard reicht. Bei Bedarf `Blobs` anhaken.
+* **Restore-Kompatibilität**:
+
+  * Wenn du später in der gleichen Charly-Installation wiederherstellst, kannst du alles so lassen.
+
+---
+
+### 🔹 Dump starten
+
+* Mit **OK** ausführen → unten in pgAdmin erscheint der Fortschritt.
+* Datei landet da, wo du’s angegeben hast.
+
+---
+
+### 🔹 Restore (nur falls nötig)
+
+* Neue/leere DB erstellen (z. B. `charly_restore`).
+* Rechtsklick → **Restore…**
+* Format: gleich wie beim Dump (`Custom` oder `Plain`).
+* Datei auswählen → GO.
+
+---
+
+👉 Vorteil in pgAdmin: keine Kommandos tippen, alles klicki-bunti.
+👉 Nachteil: unter der Haube ruft pgAdmin auch nur `pg_dump` / `pg_restore` auf, d. h. du brauchst Schreibrechte im Backup-Verzeichnis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+--- 
+
+<br><br>
+
+
+
+
+
+
+
+
+
+
 # GUI
 
 ## pgadmin

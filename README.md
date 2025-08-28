@@ -13,8 +13,10 @@
 
 # Dump
 
+## Single File
 
-## pgAdmin
+
+### pgAdmin
 
 1. **pgAdmin starten** (meist `pgAdmin 4`).
 2. Links im Browser-Baum deine **Server-Verbindung** öffnen.
@@ -28,46 +30,60 @@
 ---
 
 ### 🔹 Backup-Dialog einstellen
+Absolut. Um eine **vollständige und wiederherstellbare** Datenbanksicherung in pgAdmin zu erstellen, müssen Sie sicherstellen, dass sowohl die Struktur (Schemata, Tabellen, etc.) als auch die Daten selbst exportiert werden.
 
-* **Format**:
+Führen Sie die folgenden Schritte aus und achten Sie genau auf die fett markierten Optionen.
 
-  * `Custom` (empfohlen, flexibler für Restore mit `pg_restore`)
-  * oder `Plain` (SQL-Datei, kann man direkt durchlaufen lassen).
-* **Filename**:
+### Schritt-für-Schritt-Anleitung für einen vollständigen Export
 
-  * z. B. `C:\Backup\charly.backup`
-* **Dump Options #1**:
+1.  **Datenbank auswählen:** Machen Sie im Objekt-Browser auf der linken Seite einen Rechtsklick auf die Datenbank, die Sie exportieren möchten (z. B. `charly-olap2`).
+2.  **Backup starten:** Wählen Sie im Kontextmenü **"Backup..."**. Es öffnet sich ein neues Fenster.
 
-  * `Include CREATE DATABASE` aktivieren, wenn du eine 1:1-Kopie willst.
-* **Dump Options #2**:
+  *(Beispiel-Screenshot)*
 
-  * Standard reicht. Bei Bedarf `Blobs` anhaken.
-* **Restore-Kompatibilität**:
+### Wichtige Einstellungen im "Backup"-Fenster
 
-  * Wenn du später in der gleichen Charly-Installation wiederherstellst, kannst du alles so lassen.
+#### Tab: "General"
 
----
+*   **Filename:** Wählen Sie einen Speicherort und einen aussagekräftigen Namen für Ihre Backup-Datei (z. B. `charly-pvs-backup_2025-08-28.sql`).
+*   **Format:** Hier müssen Sie eine wichtige Entscheidung treffen.
+    *   **Custom:** **Dies ist die empfohlene Option.** Das Ergebnis ist eine komprimierte Binärdatei, die sehr flexibel beim Wiederherstellen ist. Sie können damit auch nur einzelne Teile der Datenbank wiederherstellen. Zum Importieren benötigen Sie das Werkzeug "Restore".
+    *   **Plain:** Dies erzeugt eine `.sql`-Textdatei mit allen SQL-Befehlen. Sie ist für Menschen lesbar und universell einsetzbar, aber oft sehr groß und weniger flexibel beim Import.
+    *   **Tar / Directory:** Diese Formate sind für spezielle Anwendungsfälle und seltener notwendig. Für einen vollständigen Einzel-Datei-Export ist **Custom** oder **Plain** die beste Wahl.
 
-### 🔹 Dump starten
+#### Tab: "Dump Options"
 
-* Mit **OK** ausführen → unten in pgAdmin erscheint der Fortschritt.
-* Datei landet da, wo du’s angegeben hast.
+Hier sind die entscheidenden Einstellungen für die Vollständigkeit.
 
----
+*   **Sections:**
+    *   ✅ **Pre-data:** **MUSS** angehakt sein. Dies exportiert die Definitionen der Objekte, also die Struktur Ihrer Datenbank (Tabellen, Schemata etc.).
+    *   ✅ **Data:** **MUSS** angehakt sein. Dies exportiert alle eigentlichen Daten aus den Tabellen.
+    *   ✅ **Post-data:** **MUSS** angehakt sein. Dies exportiert die Befehle, die nach dem Einfügen der Daten ausgeführt werden müssen, wie z. B. das Erstellen von Indizes, Triggern und Constraints (Fremdschlüsseln).
 
-### 🔹 Restore (nur falls nötig)
+*   **Type of objects:**
+    *   Stellen Sie sicher, dass hier **keine** Haken gesetzt sind, um Objekte auszuschließen (z. B. "Only data" oder "Only schema"). Sie wollen beides.
 
-* Neue/leere DB erstellen (z. B. `charly_restore`).
-* Rechtsklick → **Restore…**
-* Format: gleich wie beim Dump (`Custom` oder `Plain`).
-* Datei auswählen → GO.
+*   **Do not save:**
+    *   Stellen Sie sicher, dass hier **keine** Haken gesetzt sind, insbesondere nicht bei "Owner" oder "Privileges". Sie wollen diese Informationen in der Regel mitspeichern.
 
----
+*   **Queries:**
+*   *   ✅ **Include IF ELSE Statement:** Empfohlen.
+    *   ✅ **Use Insert Commands:** Empfohlen.
+    *   ✅ **Include CREATE DATABASE statement:** **WICHTIG!** Setzen Sie diesen Haken. Dadurch wird beim späteren Import der `CREATE DATABASE`-Befehl mit in die Datei geschrieben, was die Wiederherstellung auf einem neuen System vereinfacht.
+    *   ✅ **Include DROP DATABASE statement:** Optional, aber nützlich, wenn die Zieldatenbank vor dem Import komplett sauber gelöscht werden soll. Vorsicht bei der Verwendung!
 
-👉 Vorteil in pgAdmin: keine Kommandos tippen, alles klicki-bunti.
-👉 Nachteil: unter der Haube ruft pgAdmin auch nur `pg_dump` / `pg_restore` auf, d. h. du brauchst Schreibrechte im Backup-Verzeichnis.
+*   **Table Options:**
+    *   ✅ **Use Column Inserts:** Empfohlen. Dies macht das Skript robuster gegenüber Änderungen in der Spaltenreihenfolge.
 
+#### Zusammenfassung der wichtigsten Optionen:
 
+| Tab | Option | Empfohlene Einstellung | Grund |
+| :--- | :--- | :--- | :--- |
+| **General** | Format | **Custom** | Flexibelste und sicherste Methode für den Restore. |
+| **Dump Options**| Sections | ✅ **Pre-data**<br>✅ **Data**<br>✅ **Post-data** | Stellt sicher, dass Struktur, Daten und Indizes/Constraints exportiert werden. |
+| **Dump Options**| Queries | ✅ **Include CREATE DATABASE statement** | Erleichtert das Wiederherstellen, da die Datenbank selbst angelegt wird. |
+
+Wenn Sie diese Einstellungen verwenden, erhalten Sie eine Datei, die alles Notwendige enthält, um die Datenbank auf einem anderen (oder demselben) Server vollständig wiederherzustellen. Klicken Sie am Ende auf **"Backup"**, um den Vorgang zu starten.
 
 
 

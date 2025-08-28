@@ -13,6 +13,23 @@
 
 # Dump
 
+
+## Restore
+
+### pgAdmin
+
+Create new database > right click restore > Select sql file > click restore
+
+
+<br><br>
+<br><br>
+
+
+
+
+
+## Create
+
 ## Single File
 
 

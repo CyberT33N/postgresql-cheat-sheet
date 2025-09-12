@@ -25,7 +25,65 @@ Create new database > right click restore > Select sql file > click restore
 <br><br>
 
 
+### DBeaver
+1. **Neue Datenbank erstellen** (falls noch nicht vorhanden)
+   Rechtsklick auf die Verbindung → *SQL Editor* öffnen.
 
+2. **Dump laden**:
+
+   * Rechtsklick auf die Datenbank → *Tools* → **Execute Script…**
+   * Dein `.sql`-Dump auswählen.
+   * DBeaver führt dann alle SQL-Statements aus dem Dump auf der gewählten DB aus.
+
+3. **Oder per SQL Editor**:
+
+   * Editor öffnen → Menü **File > Open File…** → Dump `.sql` auswählen.
+   * Mit ⚡ (Execute) laufen lassen.
+
+### Wichtiger Unterschied zu pgAdmin:
+
+* pgAdmin kann `.backup`-Dateien (binäre Dumps von `pg_dump`) direkt „restoren“.
+* DBeaver kann nur **plain SQL Dumps** ausführen.
+* Wenn du also mit `pg_dump -Fc` (custom format) exportiert hast, musst du `pg_restore` in der Konsole benutzen – DBeaver versteht das Format nicht.
+
+👉 Faustregel:
+
+* **SQL Dump (.sql)** → direkt in DBeaver ausführbar.
+* **Binary Dump (.backup)** → mit `pg_restore` in CLI oder pgAdmin wiederherstellen.
+
+Soll ich dir ein knackiges Beispiel mit den genauen CLI-Befehlen für `pg_restore` geben, damit du beide Varianten parat hast?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+---
+
+<br><br>
 
 
 ## Create

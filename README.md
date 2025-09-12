@@ -11,6 +11,51 @@
 
 
 
+
+# CLI
+
+## pg_restore
+
+### Roles
+
+#### Create
+```
+& "C:\Users\denni\AppData\Roaming\DBeaverData\drivers\clients\postgresql\win\17\psql.exe" `
+  -h localhost -p 5432 -U test -d postgres -c "CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'irgendeinpw';"
+```
+
+
+#### Delete
+```
+& "C:\Users\denni\AppData\Roaming\DBeaverData\drivers\clients\postgresql\win\17\psql.exe" `
+  -h localhost -p 5432 -U test -d charly -c "DROP OWNED BY postgres CASCADE;"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+
+---
+
+<br><br>
+
+
+
+
+
+
+
 # Dump
 
 
@@ -20,6 +65,8 @@
 ### CLI
 
 ### Custom-Format-Dump
+
+Powershell:
 ```
 & "C:\Users\userNameHere\AppData\Roaming\DBeaverData\drivers\clients\postgresql\win\17\pg_restore.exe" `
   -h localhost -p 5432 -U test -d charly `
@@ -27,6 +74,39 @@
   "C:\git\dumps\charly_full.sql"
 
 ```
+
+#### FAQ
+
+#### pg_restore: error: could not execute query: ERROR:  role "postgres" does not exist
+- Einfach den User postgres hinzufügen, dann laufen die ALTERs sauber durch:
+  
+Powershell:
+```
+& "C:\Users\denni\AppData\Roaming\DBeaverData\drivers\clients\postgresql\win\17\psql.exe" `
+  -h localhost -p 5432 -U test -d postgres -c "CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'irgendeinpw';"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+<br><br>
+
 
 
 

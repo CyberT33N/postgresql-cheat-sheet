@@ -16,6 +16,22 @@
 
 ## Restore
 
+
+### CLI
+
+### Custom-Format-Dump
+```
+& "C:\Users\userNameHere\AppData\Roaming\DBeaverData\drivers\clients\postgresql\win\17\pg_restore.exe" `
+  -h localhost -p 5432 -U test -d charly `
+  --clean --if-exists `
+  "C:\git\dumps\charly_full.sql"
+
+```
+
+
+
+
+
 ### pgAdmin
 
 Create new database > right click restore > Select sql file > click restore

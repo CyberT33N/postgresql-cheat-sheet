@@ -6,6 +6,20 @@
 
 
 
+# GUI
+- pgadmin4
+- dbeaver
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -37,6 +37,7 @@
 
 ### Windows
 - https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+  - Beinhaltet auch server und pgadmin4 man kann aber nur cli auswählen 
 
 
 

@@ -12,7 +12,12 @@
 
 
 
+---
 
+
+
+
+---
 
 
 
@@ -27,6 +32,16 @@
 
 
 # CLI
+
+## Install
+
+### Windows
+- https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+
+
+
+
 
 ## pg_restore
 
